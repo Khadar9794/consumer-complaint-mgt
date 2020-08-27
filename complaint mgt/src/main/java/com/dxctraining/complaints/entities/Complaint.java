@@ -1,11 +1,12 @@
 package com.dxctraining.complaints.entities;
 
 import javax.persistence.Entity;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class Complaints {
+public class Complaint {
    @GeneratedValue
    @Id
     private int id;
