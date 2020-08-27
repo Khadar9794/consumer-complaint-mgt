@@ -2,6 +2,7 @@ package com.dxctraining.complaints.controllers;
 
 
 import com.dxctraining.complaints.dto.ComplaintDto;
+
 import com.dxctraining.complaints.dto.ConsumerDto;
 import com.dxctraining.complaints.dto.CreateComplaint;
 import com.dxctraining.complaints.entities.Complaints;
@@ -33,23 +34,17 @@ public class ComplaintController {
     @POST
     @Consumes("application/json")
     @Produces("application/json")
-    public ComplaintDto add(CreateComplaint data) {
-        String description = data.getDescription();
-        System.out.println("the description is="+description);
-        int consumerid = data.getConsumerId();
-        System.out.println("consumer id is=" + consumerid);
-        Complaints complaints = new Complaints(description, consumerid);
-        complaints = service.add(complaints);
-        ConsumerDto dto = fetchfromConsumerId(consumerid);
-        System.out.println("the consumer name "+consumerDto.getName());
-        ComplaintDto dto = util.complaintDto(complaints, consumerid, consumerDto.getName());
-        return complaintDto;
-
-    }
+    public ComplaintDto registerComplaint(@RequestBody CreateComplaintRequest requestData) {
+		Complaint complaint = new Complaint(requestData.getDescription(),requestData.getConsumerId());
+		service.add(complaint);
+		ConsumerDto dto = fetchFromConsumerById(requestData.getConsumerId());
+		ComplaintDto dto = util.complaintDto(complaint, consumerDto.getId(), consumerDto.getName());
+		return dto;
+	}
 
     private ConsumerDto fetchfromConsumerId(int consumerid) {
       String url="http://localhost:8787/consumers/get/"+consumerid;
-      ConsumerDto consumerDto=restTemplate.getForObject(url,ConsumerDto.class);
+      ConsumerDto dto=restTemplate.getForObject(url,ConsumerDto.class);
       return consumerDto;
     }
 
