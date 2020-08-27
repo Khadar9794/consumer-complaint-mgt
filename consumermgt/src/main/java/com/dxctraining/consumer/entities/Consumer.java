@@ -2,6 +2,7 @@ package com.dxctraining.consumer.entities;
 
 import javax.persistence.Entity;
 
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.util.Objects;
@@ -37,17 +38,5 @@ public class Consumer {
         this.name = name;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass())
-            return false;
-        Consumer consumer = (Consumer) o;
-        return id == consumer.id;
-    }
 
-    @Override
-    public int hashCode() {
-        return id;
-    }
 }
