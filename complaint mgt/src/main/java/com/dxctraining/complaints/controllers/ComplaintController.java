@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @Component
-@Path("/complaint")
+@Path("/complaints")
 public class ComplaintController {
 
     @Autowired
